@@ -1,0 +1,19 @@
+// Last updated: 7/9/2026, 9:47:12 AM
+
+class Solution {
+    public String resultingString(String s) {
+        StringBuilder sb = new StringBuilder();
+
+        for(char ch : s.toCharArray()){
+            if(sb.length() > 0){
+                char last = sb.charAt(sb.length() - 1);
+                if(Math.abs(last-ch) == 1 || Math.abs(last-ch) == 25){
+                    sb.deleteCharAt(sb.length()-1);
+                    continue;
+                }
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+}
