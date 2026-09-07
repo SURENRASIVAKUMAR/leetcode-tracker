@@ -1,44 +1,24 @@
-// Last updated: 9/7/2026, 1:56:59 PM
-1class Solution {
-2    public int[] findDiagonalOrder(int[][] mat) {
-3        int rows = mat.length;
-4        int cols = mat[0].length;
-5        int[] ans = new int[rows * cols];
-6        int row = 0;
-7        int col = 0;
-8        int index = 0;
-9        boolean up = true;
-10        while (index < rows * cols) {
-11            ans[index++] = mat[row][col];
-12            if (up) {
-13                if (col == cols - 1) {
-14                    row++;
-15                    up = false;
-16                }
-17                else if (row == 0) {
-18                    col++;
-19                    up = false;
-20                }
-21                else {
-22                    row--;
-23                    col++;
-24                }
-25            }
-26            else {
-27                if (row == rows - 1) {
-28                    col++;
-29                    up = true;
-30                }
-31                else if (col == 0) {
-32                    row++;
-33                    up = true;
-34                }
-35                else {
-36                    row++;
-37                    col--;
-38                }
-39            }
-40        }
-41        return ans;
-42    }
-43}
+// Last updated: 9/7/2026, 2:05:10 PM
+1import java.util.*;
+2class Solution {
+3    public int[][] allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
+4        int[][] ans = new int[rows * cols][2];
+5        int k = 0;
+6        for (int r = 0; r < rows; r++) {
+7            for (int c = 0; c < cols; c++) {
+8                ans[k][0] = r;
+9                ans[k][1] = c;
+10
+11                k++;
+12            }
+13        }
+14        Arrays.sort(ans, (a, b) -> {
+15            int distanceA = Math.abs(a[0] - rCenter)
+16                          + Math.abs(a[1] - cCenter);
+17            int distanceB = Math.abs(b[0] - rCenter)
+18                          + Math.abs(b[1] - cCenter);
+19            return distanceA - distanceB;
+20        });
+21        return ans;
+22    }
+23}
